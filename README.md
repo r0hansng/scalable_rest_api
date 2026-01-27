@@ -39,96 +39,15 @@ This is **not a CRUD demo**. It is intentionally designed to reflect the constra
 ---
 ## Project Structure
 ```text
-project-root/
-│
-├── src/
-│   ├── app.js
-│   ├── server.js
-│   │
-│   ├── config/
-│   │   ├── env.js
-│   │   ├── database.js
-│   │   └── logger.js
-│   │
-│   ├── modules/
-│   │   ├── auth/
-│   │   │   ├── auth.routes.js
-│   │   │   ├── auth.controller.js
-│   │   │   ├── auth.service.js
-│   │   │   └── auth.validator.js
-│   │   │
-│   │   ├── users/
-│   │   │   ├── user.routes.js
-│   │   │   ├── user.controller.js
-│   │   │   ├── user.service.js
-│   │   │   ├── user.repository.js
-│   │   │   └── user.model.js
-│   │   │
-│   │   ├── accounts/
-│   │   │   ├── account.routes.js
-│   │   │   ├── account.controller.js
-│   │   │   ├── account.service.js
-│   │   │   ├── account.repository.js
-│   │   │   └── account.model.js
-│   │   │
-│   │   └── transactions/
-│   │       ├── transaction.routes.js
-│   │       ├── transaction.controller.js
-│   │       ├── transaction.service.js
-│   │       ├── transaction.repository.js
-│   │       ├── transaction.model.js
-│   │       └── transaction.validator.js
-│   │
-│   ├── middleware/
-│   │   ├── auth.middleware.js
-│   │   ├── error.middleware.js
-│   │   ├── requestId.middleware.js
-│   │   └── rateLimiter.middleware.js
-│   │
-│   ├── errors/
-│   │   ├── AppError.js
-│   │   ├── ValidationError.js
-│   │   ├── AuthorizationError.js
-│   │   ├── NotFoundError.js
-│   │   └── ConflictError.js
-│   │
-│   ├── utils/
-│   │   ├── asyncHandler.js
-│   │   ├── pagination.js
-│   │   ├── idempotency.js
-│   │   └── hash.js
-│   │
-│   └── constants/
-│       ├── roles.js
-│       ├── errorCodes.js
-│       └── transactionStatus.js
-│
-├── prisma/
-│   ├── schema.prisma
-│   └── migrations/
-│
-├── scripts/
-│   ├── seed.js
-│   ├── reset-db.js
-│   ├── backfill.js
-│   └── README.md
-│
-├── tests/
-│   ├── unit/
-│   ├── integration/
-│   └── load/
-│
-├── docs/
-│   ├── architecture.md
-│   ├── concurrency.md
-│   └── tradeoffs.md
-│
-├── .env.example
-├── .gitignore
-├── Dockerfile
-├── docker-compose.yml
-├── package.json
-└── README.md
+src/
+  app.js            # Express app configuration
+  server.js         # Entry point
+
+  config/           # Environment & infrastructure config
+  middleware/       # Auth, error handling, rate limiting
+  modules/          # Feature-based domains (users, accounts, transactions)
+  utils/            # Shared helpers (async handling, hashing)
+  errors/           # Typed application errors
 ```
 
 ---
