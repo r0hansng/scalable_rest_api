@@ -4,7 +4,7 @@ import { env, logger } from './config/index.js';
 const PORT = env.port || 3000;
 
 const server = app.listen(PORT, () => {
-  logger.info(`Server running in ${env.nodeEnv} mode on port ${PORT}`);
+  logger.info(`Server running in ${env.nodeEnv} mode on http://localhost:${PORT}`);
 });
 
 process.on('unhandledRejection', (err) => {

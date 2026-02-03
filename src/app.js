@@ -5,6 +5,7 @@ import rateLimit from 'express-rate-limit';
 import pinoHttp from 'pino-http';
 import { logger } from './config/index.js';
 import { errorHandler } from './errors/errorHandler.js';
+import healthRoutes from './routes/health.routes.js';
 
 const app = express();
 
@@ -25,6 +26,9 @@ app.use(
 
 // HTTP request logging
 app.use(pinoHttp({ logger }));
+
+// Health check route
+app.use('/', healthRoutes);
 
 // Error handling
 app.use(errorHandler);
