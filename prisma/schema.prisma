@@ -5,11 +5,72 @@
 // Try Prisma Accelerate: https://pris.ly/cli/accelerate-init
 
 generator client {
-  provider = "prisma-client"
+  provider = "prisma-client-js"
   output   = "../src/generated/prisma"
 }
 
 datasource db {
   provider = "postgresql"
   url      = env("DATABASE_URL")
+}
+
+enum Role {
+  USER
+  ADMIN
+}
+
+enum TransactionStatus {
+  PENDING
+  SUCCESS
+  FAILED
+  REVERSED
+}
+
+model User {
+  id       String @id @default(uuid())
+  email    String @unique
+  password String
+  role     Role   @default(USER)
+
+  accounts Account[]
+
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+}
+
+model Account {
+  id      String  @id @default(uuid())
+  userId  String
+  balance Decimal @db.Decimal(18, 2)
+
+  user         User          @relation(fields: [userId], references: [id])
+  transactions Transaction[]
+
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  @@index([userId])
+}
+
+model Transaction {
+  id          String            @id @default(uuid())
+  accountId   String
+  amount      Decimal           @db.Decimal(18, 2)
+  status      TransactionStatus
+  referenceId String            @unique
+
+  account        Account         @relation(fields: [accountId], references: [id])
+  idempotencyKey IdempotencyKey?
+
+  createdAt DateTime @default(now())
+}
+
+model IdempotencyKey {
+  id            String @id @default(uuid())
+  key           String @unique
+  transactionId String @unique
+
+  transaction Transaction @relation(fields: [transactionId], references: [id])
+
+  createdAt DateTime @default(now())
 }
