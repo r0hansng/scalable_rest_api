@@ -1,8 +1,11 @@
-import { PrismaClient } from '../src/generated/prisma/index.js';
+import prisma from '../src/config/database.js';
 import { hashPassword } from '../src/utils/hash.js';
 import logger from '../src/config/logger.js';
 
-const prisma = new PrismaClient();
+/**
+ * Seed script
+ * Seeds the database with an admin user
+ */
 
 async function main() {
   try {

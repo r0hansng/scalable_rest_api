@@ -1,7 +1,10 @@
-import { PrismaClient } from '../src/generated/prisma/index.js';
+import prisma from '../src/config/database.js';
 import logger from '../src/config/logger.js';
 
-const prisma = new PrismaClient();
+/**
+ * Backfill script
+ * Backfills the accounts with a balance of 0
+ */
 
 async function main() {
   try {

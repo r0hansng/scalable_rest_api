@@ -1,8 +1,10 @@
-import { PrismaClient } from '../src/generated/prisma/index.js';
+import prisma from '../src/config/database.js';
 import logger from '../src/config/logger.js';
 
-const prisma = new PrismaClient();
-
+/**
+ * Health check script
+ * Checks the database connection and the number of users in the database
+ */
 async function main() {
   try {
     logger.info('Checking database connection...');
