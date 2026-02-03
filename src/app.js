@@ -6,6 +6,7 @@ import pinoHttp from 'pino-http';
 import { logger } from './config/index.js';
 import { errorHandler } from './errors/errorHandler.js';
 import healthRoutes from './routes/health.routes.js';
+import requestIdMiddleware from './middleware/requestId.middleware.js';
 
 const app = express();
 
@@ -14,6 +15,8 @@ app.use(helmet());
 app.use(cors());
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
+
+app.use(requestIdMiddleware);
 
 // Rate limiting
 app.use(
@@ -26,6 +29,13 @@ app.use(
 
 // HTTP request logging
 app.use(pinoHttp({ logger }));
+
+app.get('/', (req, res) => {
+  res.status(200).json({
+    service: 'scalable-rest-api',
+    status: 'running',
+  });
+});
 
 // Health check route
 app.use('/', healthRoutes);

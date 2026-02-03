@@ -5,27 +5,42 @@ import logger from '../config/logger.js';
 const router = express.Router();
 
 /**
- * GET /
- * Basic health check for the API
+ * Liveness probe
+ * Confirms the process is running
  */
-router.get('/', async (req, res) => {
+router.get('/healthz', (req, res) => {
+  res.status(200).json({
+    status: 'ok',
+    service: 'scalable-rest-api',
+    uptime: process.uptime(),
+    timestamp: new Date().toISOString(),
+    requestId: req.id,
+  });
+});
+
+/**
+ * Readiness probe
+ * Confirms required dependencies are reachable
+ */
+router.get('/readyz', async (req, res) => {
   try {
-    // DB ping
     await prisma.$queryRaw`SELECT 1`;
 
     res.status(200).json({
-      status: 'ok',
-      message: 'Server is running',
-      environment: process.env.NODE_ENV,
-      uptime: process.uptime(),
-      timestamp: new Date().toISOString(),
+      status: 'ready',
+      database: 'connected',
+      requestId: req.id,
     });
   } catch (err) {
-    logger.error('Health check failed', err);
+    logger.error('Readiness check failed', {
+      requestId: req.id,
+      error: err,
+    });
 
-    res.status(500).json({
-      status: 'error',
-      message: 'Server is up but database is unreachable',
+    res.status(503).json({
+      status: 'not_ready',
+      database: 'unreachable',
+      requestId: req.id,
     });
   }
 });

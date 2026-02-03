@@ -1,5 +1,6 @@
 import app from './app.js';
 import { env, logger } from './config/index.js';
+import prisma from './config/database.js';
 
 const PORT = env.port || 3000;
 
