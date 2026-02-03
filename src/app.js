@@ -4,9 +4,10 @@ import helmet from 'helmet';
 import rateLimit from 'express-rate-limit';
 import pinoHttp from 'pino-http';
 import { logger } from './config/index.js';
-import { errorHandler } from './errors/errorHandler.js';
+import { errorHandler } from './middleware/error.middleware.js';
 import healthRoutes from './routes/health.routes.js';
 import requestIdMiddleware from './middleware/requestId.middleware.js';
+import rateLimiterMiddleware from './middleware/rateLimiter.middleware.js';
 
 const app = express();
 
@@ -18,14 +19,7 @@ app.use(express.urlencoded({ extended: true }));
 
 app.use(requestIdMiddleware);
 
-// Rate limiting
-app.use(
-  rateLimit({
-    windowMs: 15 * 60 * 1000,
-    max: 100,
-    message: 'Too many requests, please try again later.',
-  }),
-);
+app.use(rateLimiterMiddleware());
 
 // HTTP request logging
 app.use(pinoHttp({ logger }));
