@@ -1,6 +1,6 @@
 import jwt from 'jsonwebtoken';
 import { env } from '../config/index.js'; // central config export
-import { AuthorizationError } from '../errors/index.js';
+import { AuthorizationError } from '../errors/AuthorizationError.js';
 
 /**
  * Authentication middleware
@@ -20,7 +20,7 @@ export const authenticateUser = (req, res, next) => {
   }
 
   try {
-    const payload = jwt.verify(token, env.JWT_SECRET); // use env from config/index.js
+    const payload = jwt.verify(token, env.jwtSecret); // use env from config/index.js
     req.user = payload; // { id, email, role }
     next();
   } catch (err) {

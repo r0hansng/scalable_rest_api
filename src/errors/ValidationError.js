@@ -1,5 +1,5 @@
 import { AppError } from './AppError.js';
-import { ERROR_CODES } from './errorCodes.js';
+import { ERROR_CODES } from '../constants/errorCodes.js';
 
 export class ValidationError extends AppError {
   constructor(message = 'Invalid request data') {

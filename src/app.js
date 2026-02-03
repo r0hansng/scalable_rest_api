@@ -1,13 +1,13 @@
 import express from 'express';
 import cors from 'cors';
 import helmet from 'helmet';
-import rateLimit from 'express-rate-limit';
 import pinoHttp from 'pino-http';
 import { logger } from './config/index.js';
 import { errorHandler } from './middleware/error.middleware.js';
 import healthRoutes from './routes/health.routes.js';
+import userRoutes from './routes/user.routes.js';
 import requestIdMiddleware from './middleware/requestId.middleware.js';
-import rateLimiterMiddleware from './middleware/rateLimiter.middleware.js';
+import { rateLimiter } from './middleware/rateLimiter.middleware.js';
 
 const app = express();
 
@@ -19,7 +19,7 @@ app.use(express.urlencoded({ extended: true }));
 
 app.use(requestIdMiddleware);
 
-app.use(rateLimiterMiddleware());
+app.use(rateLimiter());
 
 // HTTP request logging
 app.use(pinoHttp({ logger }));
@@ -33,6 +33,9 @@ app.get('/', (req, res) => {
 
 // Health check route
 app.use('/', healthRoutes);
+
+// User routes
+app.use('/api/v1/users', userRoutes);
 
 // Error handling
 app.use(errorHandler);

@@ -1,4 +1,4 @@
-import { ValidationError } from '../errors/index.js';
+import { ValidationError } from '../errors/ValidationError.js';
 
 /**
  * Validate request body, query, or params using a Zod schema
