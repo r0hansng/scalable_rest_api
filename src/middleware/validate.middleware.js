@@ -9,7 +9,9 @@ import { ValidationError } from '../errors/ValidationError.js';
 export const validateRequest = (schema, target = 'body') => {
   return (req, res, next) => {
     try {
-      schema.parse(req[target]);
+      const parsed = schema.parse(req[target]);
+      req[target] = parsed;
+      // console.log('REQ BODY:', req.body);
       next();
     } catch (err) {
       // Wrap Zod errors in a consistent ValidationError
