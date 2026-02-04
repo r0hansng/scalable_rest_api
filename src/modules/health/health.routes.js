@@ -1,6 +1,6 @@
 import express from 'express';
-import prisma from '../config/database.js';
-import logger from '../config/logger.js';
+import prisma from '../../config/database.js';
+import logger from '../../config/logger.js';
 
 const router = express.Router();
 

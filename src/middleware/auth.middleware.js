@@ -20,7 +20,7 @@ export const authenticateUser = (req, res, next) => {
   }
 
   try {
-    const payload = jwt.verify(token, env.jwtSecret); // use env from config/index.js
+    const payload = jwt.verify(token, env.jwtSecret); 
     req.user = payload; // { id, email, role }
     next();
   } catch (err) {

@@ -4,8 +4,8 @@ import helmet from 'helmet';
 import pinoHttp from 'pino-http';
 import { logger } from './config/index.js';
 import { errorHandler } from './middleware/error.middleware.js';
-import healthRoutes from './routes/health.routes.js';
-import userRoutes from './routes/user.routes.js';
+import healthRoutes from './modules/health/health.routes.js';
+import { userRoutes } from './modules/users/index.js';
 import requestIdMiddleware from './middleware/requestId.middleware.js';
 import { rateLimiter } from './middleware/rateLimiter.middleware.js';
 

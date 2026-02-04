@@ -1,5 +1,5 @@
 import { AppError } from './AppError.js';
-import { ERROR_CODES } from './errorCodes.js';
+import { ERROR_CODES } from '../constants/errorCodes.js';
 
 export class NotFoundError extends AppError {
   constructor(resource = 'Resource') {
