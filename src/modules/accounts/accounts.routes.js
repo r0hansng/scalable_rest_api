@@ -5,6 +5,7 @@ import { validateRequest } from '../../middleware/validate.middleware.js';
 import { createAccountSchema } from './accounts.validation.js';
 import requestId from '../../middleware/requestId.middleware.js';
 import { rateLimiter } from '../../middleware/rateLimiter.middleware.js';
+import { transactionsRoutes } from '../transactions/index.js';
 
 const router = express.Router();
 
@@ -16,28 +17,17 @@ router.use(rateLimiter({ windowMs: 15 * 60 * 1000, max: 100 }));
  * Create a new account for logged-in user
  */
 router.post(
-    '/',
-    authenticateUser,
-    validateRequest(createAccountSchema),
-    accountsController.createAccountController,
-);
-
-
-router.get(
-    '/',
-    authenticateUser,
-    accountsController.getAccountsController,
-);
-router.get(
-  '/:accountId',
+  '/',
   authenticateUser,
-  accountsController.getAccountByIdController,
+  validateRequest(createAccountSchema),
+  accountsController.createAccountController,
 );
 
-router.delete(
-  '/:accountId',
-  authenticateUser,
-  accountsController.closeAccountController,
-);
+router.get('/', authenticateUser, accountsController.getAccountsController);
+router.get('/:accountId', authenticateUser, accountsController.getAccountByIdController);
+
+router.delete('/:accountId', authenticateUser, accountsController.closeAccountController);
+
+router.use('/', transactionsRoutes);
 
 export default router;

@@ -23,7 +23,6 @@ export const createAccount = async ({ userId, initialBalance }) => {
   return account;
 };
 
-
 /**
  * Get all accounts for a user
  */
@@ -67,7 +66,6 @@ export const getAccountByIdForUser = async ({ userId, accountId }) => {
     },
   });
 };
-
 
 /**
  * Close an account for a user

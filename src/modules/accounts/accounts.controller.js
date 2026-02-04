@@ -62,7 +62,6 @@ export const getAccountsController = asyncHandler(async (req, res) => {
   });
 });
 
-
 /**
  * GET /api/v1/accounts/:accountId
  * Fetch a single account for logged-in user
