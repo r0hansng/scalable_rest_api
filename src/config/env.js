@@ -11,12 +11,7 @@ dotenv.config();
  * - Exits the process if configuration is invalid
  */
 
-const requiredEnvVars = [
-  'NODE_ENV',
-  'PORT',
-  'DATABASE_URL',
-  'JWT_SECRET',
-];
+const requiredEnvVars = ['NODE_ENV', 'PORT', 'DATABASE_URL', 'JWT_SECRET'];
 
 for (const key of requiredEnvVars) {
   if (!process.env[key]) {

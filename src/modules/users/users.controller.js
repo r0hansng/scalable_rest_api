@@ -1,10 +1,5 @@
 import asyncHandler from '../../utils/asyncHandler.js';
-import {
-  createUserService,
-  loginUserService,
-  getMeService,
-  deleteUserService,
-} from './index.js';
+import { createUserService, loginUserService, getMeService, deleteUserService } from './index.js';
 
 /**
  * Thin controller layer: extracts request data, calls service, sends response.
@@ -13,19 +8,13 @@ import {
 
 export const createUser = asyncHandler(async (req, res) => {
   const { email, password } = req.body;
-  const data = await createUserService(
-    { email, password },
-    { requestId: req.requestId },
-  );
+  const data = await createUserService({ email, password }, { requestId: req.requestId });
   res.status(201).json({ success: true, data });
 });
 
 export const loginUser = asyncHandler(async (req, res) => {
   const { email, password } = req.body;
-  const data = await loginUserService(
-    { email, password },
-    { requestId: req.requestId },
-  );
+  const data = await loginUserService({ email, password }, { requestId: req.requestId });
   res.status(200).json({ success: true, data });
 });
 

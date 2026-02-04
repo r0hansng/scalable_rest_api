@@ -20,7 +20,7 @@ export const authenticateUser = (req, res, next) => {
   }
 
   try {
-    const payload = jwt.verify(token, env.jwtSecret); 
+    const payload = jwt.verify(token, env.jwtSecret);
     req.user = payload; // { id, email, role }
     next();
   } catch (err) {
@@ -33,9 +33,11 @@ export const authenticateUser = (req, res, next) => {
  * - Restrict access to specific roles
  * @param  {...string} allowedRoles - e.g., 'ADMIN', 'USER'
  */
-export const authorizeRoles = (...allowedRoles) => (req, res, next) => {
-  if (!req.user || !allowedRoles.includes(req.user.role)) {
-    return next(new AuthorizationError('Access denied'));
-  }
-  next();
-};
+export const authorizeRoles =
+  (...allowedRoles) =>
+  (req, res, next) => {
+    if (!req.user || !allowedRoles.includes(req.user.role)) {
+      return next(new AuthorizationError('Access denied'));
+    }
+    next();
+  };

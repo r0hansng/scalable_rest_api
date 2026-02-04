@@ -43,12 +43,7 @@ export { default as userRoutes } from './users.routes.js';
  *
  * @type {Object}
  */
-export {
-  createUser,
-  loginUser,
-  getMe,
-  deleteUser,
-} from './users.controller.js';
+export { createUser, loginUser, getMe, deleteUser } from './users.controller.js';
 
 /**
  * Business logic service functions for user operations.
@@ -81,8 +76,4 @@ export {
  *
  * @type {Object}
  */
-export {
-  signupSchema,
-  loginSchema,
-  userIdParamSchema,
-} from './users.validation.js';
+export { signupSchema, loginSchema, userIdParamSchema } from './users.validation.js';

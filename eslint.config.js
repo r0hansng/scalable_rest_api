@@ -17,14 +17,14 @@ export default defineConfig([
     },
 
     rules: {
-      semi: ['error', 'always'],
-      quotes: ['error', 'single', { avoidEscape: true }],
+      'semi': ['error', 'always'],
+      'quotes': ['error', 'single', { avoidEscape: true }],
       'no-unused-vars': ['warn'],
       'no-console': 'off',
       'arrow-parens': ['error', 'always'],
       'comma-dangle': ['error', 'always-multiline'],
       'brace-style': ['error', '1tbs', { allowSingleLine: true }],
-      indent: ['error', 2, { SwitchCase: 1 }],
+      'indent': ['error', 2, { SwitchCase: 1 }],
       'object-curly-spacing': ['error', 'always'],
     },
   },

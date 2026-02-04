@@ -50,11 +50,9 @@ export const loginUser = async ({ email, password }, options = {}) => {
     throw new AppError({ message: 'Invalid email or password', statusCode: 401 });
   }
 
-  const token = jwt.sign(
-    { id: user.id, email: user.email, role: user.role },
-    env.jwtSecret,
-    { expiresIn: env.jwtExpiresIn || '1h' },
-  );
+  const token = jwt.sign({ id: user.id, email: user.email, role: user.role }, env.jwtSecret, {
+    expiresIn: env.jwtExpiresIn || '1h',
+  });
 
   logger.info(`User logged in: ${user.id}`, { requestId: options.requestId });
 

@@ -5,7 +5,7 @@ import { logger } from '../config/index.js';
 
 /**
  * General rate limiter middleware
- * 
+ *
  * Usage:
  * - Can be applied globally or per route
  * - Configurable window and max requests
